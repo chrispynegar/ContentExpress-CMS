@@ -26,7 +26,7 @@ foreach($config as $key => $value) {
 }
 
 // load database class
-
+require(SITE_ROOT.'library/core/database.php');
 
 // load core class
 
