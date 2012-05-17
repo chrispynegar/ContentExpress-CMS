@@ -1,7 +1,5 @@
 <?php
 
-if(!defined('SITE_ROOT')) exit('Direct access denied');
-
 /**
  * The system's configuration file
  *
