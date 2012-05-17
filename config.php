@@ -1,5 +1,14 @@
 <?php
 
+if(!defined('SITE_ROOT')) exit('Direct access denied');
+
+/**
+ * The system's configuration file
+ *
+ * @package Content Express CMS
+ * @author Chris Pynegar
+ */
+
 $config = array();
 
 $config['db_type'] = 'mysql';
