@@ -25,6 +25,12 @@ foreach($config as $key => $value) {
     define(strtoupper($key), $value);
 }
 
+// load required helpers
+$helpers = array();
+foreach($helpers as $helper) {
+    require(SITE_ROOT.'library/helpers/' . $helper . '.php');
+}
+
 // load database class
 require(SITE_ROOT.'library/core/database.php');
 
@@ -35,7 +41,7 @@ require(SITE_ROOT.'library/core/session.php');
 require(SITE_ROOT.'library/core/core.php');
 
 // load core libraries
-
+require(SITE_ROOT.'library/core/user.php');
 
 
 ?>
