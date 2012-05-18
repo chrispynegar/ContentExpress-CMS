@@ -28,10 +28,14 @@ foreach($config as $key => $value) {
 // load database class
 require(SITE_ROOT.'library/core/database.php');
 
-// load core class
+// load session session class
+require(SITE_ROOT.'library/core/session.php');
 
+// load core system crud
+require(SITE_ROOT.'library/core/core.php');
 
 // load core libraries
+
 
 
 ?>
