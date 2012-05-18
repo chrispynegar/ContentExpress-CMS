@@ -52,7 +52,9 @@ class User extends Core {
      */
     
     public function find_by_username($username = '') {
-        
+        global $database;
+        $result_array = self::find_by_sql('SELECR * FROM ' . DB_TBL_PREFIX . self::$table_name . 'WHERE username="' . $username . '" LIMIT 1');
+        return (!empty($result_array) ? array_shift($result_array) : false);
     }
     
     /**
@@ -66,7 +68,9 @@ class User extends Core {
      */
     
     public function find_by_email($email = '') {
-        
+        global $database;
+        $result_array = self::find_by_sql('SELECR * FROM ' . DB_TBL_PREFIX . self::$table_name . 'WHERE email="' . $email . '" LIMIT 1');
+        return (!empty($result_array) ? array_shift($result_array) : false);
     }
     
     /**
