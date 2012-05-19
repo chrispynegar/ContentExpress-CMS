@@ -28,8 +28,10 @@ class Template extends Core {
      * @return array
      */
     
-    public function admin_template() {
-        
+    public static function admin_template() {
+        global $database;
+        $result_array = self::find_by_sql('SELECT * FROM ' . DB_TBL_PREFIX . static::$table_name . ' WHERE type="admin" AND current="1" LIMIT 1');
+        return (!empty($result_array) ? array_shift($result_array) : false);
     }
     
 }

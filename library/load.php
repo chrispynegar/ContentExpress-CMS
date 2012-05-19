@@ -41,10 +41,13 @@ require(SITE_ROOT.'library/core/session.php');
 require(SITE_ROOT.'library/core/core.php');
 
 // load core libraries
-$libraries = array('user');
+$libraries = array('user', 'template');
 foreach($libraries as $library) {
     require(SITE_ROOT.'library/core/'.$library.'.php');
 }
 
+$admin_template = Template::admin_template();
+
+define('ADMIN_TEMPLATE', SITE_ROOT.'templates/'.$admin_template->directory.'/');
 
 ?>
