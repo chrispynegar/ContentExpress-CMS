@@ -38,7 +38,14 @@ class User extends Core {
      */
     
     public function authenticate($username = '', $password = '') {
-        
+        global $database;
+        $username = $database->escape_value($username);
+        $password = $database->escape_value($password);
+        $hashed_password = sha1($password);
+        $sql = 'SELECT id, username, password FROM ' . DB_TBL_PREFIX.self::$table_name;
+        $sql .= ' WHERE username = \''.$username.'\' AND password = \''.$hashed_password.'\' LIMIT 1';
+        $result_array = self::find_by_sql($sql);
+        return !empty($result_array($result_array) ? array_shift($result_array) : false); 
     }
     
     /**
