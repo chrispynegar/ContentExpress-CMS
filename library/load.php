@@ -49,5 +49,7 @@ foreach($libraries as $library) {
 $admin_template = Template::admin_template();
 
 define('ADMIN_TEMPLATE', SITE_ROOT.'templates/'.$admin_template->directory.'/');
+define('ADMIN_TEMPLATE_HEADER', ADMIN_TEMPLATE.'header.php');
+define('ADMIN_TEMPLATE_FOOTER', ADMIN_TEMPLATE.'footer.php');
 
 ?>
