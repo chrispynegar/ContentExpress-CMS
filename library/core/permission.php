@@ -14,7 +14,17 @@ class Permission extends Core {
 	protected static $table_name = 'permissions';
 	protected static $table_fields = array('id', 'name', 'access');
 	
-	public function access($access, $permission_id = null) {
+	
+	/**
+	 * Access
+	 *
+	 * Checks user has permission to access requested section
+	 *
+	 * @param int
+	 * @param int
+	 * @return boolean
+	 */
+	public static function access($access, $permission_id = null) {
 		global $session;
 		if(!empty($permission_id)) {
 			$permission = Permission::find_by_id($permission_id);
