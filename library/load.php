@@ -26,9 +26,13 @@ foreach($config as $key => $value) {
 }
 
 // load required helpers
-$helpers = array();
+$helpers = array('system');
 foreach($helpers as $helper) {
-    require(SITE_ROOT.'library/helpers/'.$helper.'.php');
+	if(file_exists(SITE_ROOT.'library/helpers/'.$helper.'.php')) {
+		require(SITE_ROOT.'library/helpers/'.$helper.'.php');
+	} elseif(file_exists(SITE_ROOT.'library/helpers/'.$helper.'_helper.php')) {
+		require(SITE_ROOT.'library/helpers/'.$helper.'_helper.php');
+	}
 }
 
 // load database class
