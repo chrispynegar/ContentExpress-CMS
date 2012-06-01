@@ -1,14 +1,14 @@
 <?php
 
-if(!file_exists('../config.php')) {
-	header('Location: ../install/index.php');
-	exit;
-}
-
 require('../library/load.php');
 
 if($session->is_logged_in()) {
-	
+	if(Permission::access(4)) {
+		$session->message('You are already logged in.');
+		$system->redirect('index.php');
+	} else {
+		$system->redirect('../index.php');
+	}
 }
 
 if(isset($_POST['submit'])) {
@@ -36,6 +36,7 @@ if(isset($_POST['submit'])) {
 
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="login-container">
 		<h1>Login</h1>
+		<?php $system->message(); ?>
 		<label for="username">Username</label>
 		<input type="text" name="username" id="username" value="" />
 		<label for="password">Password</label>

@@ -28,6 +28,21 @@ class System {
 		}
 	}
 	
+	/**
+	 * Message
+	 *
+	 * Outputs a the message if $_SESSION['message']
+	 *
+	 * @access public
+	 * @return string
+	 */
+	 public function message() {
+		 if(isset($_SESSION['message']) && !empty($_SESSION['message'])) {
+			 echo $_SESSION['message']; unset($_SESSION['message']);
+			 return;
+		 }
+	 }
+	
 }
 
 $system = new System();
