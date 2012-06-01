@@ -539,6 +539,47 @@ ul.pagination li a:hover, ul.pagination li a:focus {
     color: #AAA;
 }
 
+/* Login */
+
+#login-container {
+	background: url('../images/background_noise.jpg') repeat #333;
+	width: 300px;
+	margin: 15% auto 0px;
+	overflow: hidden;
+	padding: 20px;
+    color: #EEE;
+    border-radius: 10px;
+    -webkit-border-radus: 10px;
+    -moz-border-radius: 10px;
+    box-shadow: 3px 3px 3px #222, inset 1px 1px 1px #222;
+    -webkit-box-shadow: 3px 3px 3px #222, inset 1px 1px 1px #222;
+    -moz-box-shadow: 3px 3px 3px #222, inset 1px 1px 1px #222;
+}
+
+#login-container input {
+	background: #444;
+	color: #AAA;
+	border: 1px solid #555;
+	width: 290px;
+	padding: 4px;
+	font-size: 1em;
+	margin: 7px 0;
+}
+
+#login-container input[type="submit"] {
+	width: auto;
+	margin: 7px 0px 0px 248px;
+}
+
+#login-container label {
+	font-size: .95em;
+}
+
+#login-container h1 {
+	font-size: 1.5em;
+	margin: 0px 0px 5px;
+}
+
 /* Classes */
 
 .published {
