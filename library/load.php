@@ -45,7 +45,7 @@ require(SITE_ROOT.'library/core/session.php');
 require(SITE_ROOT.'library/core/core.php');
 
 // load core libraries
-$libraries = array('user', 'template');
+$libraries = array('user', 'permission', 'template');
 foreach($libraries as $library) {
     require(SITE_ROOT.'library/core/'.$library.'.php');
 }
