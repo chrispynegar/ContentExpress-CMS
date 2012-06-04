@@ -589,3 +589,15 @@ ul.pagination li a:hover, ul.pagination li a:focus {
 .not-published {
     color: #F00;
 }
+
+.hint {
+	display: none;
+}
+
+form .left-column .hint {
+	font-style: italic;
+	float: left;
+	margin: 5px 1px 9px;
+	width: 618px;
+	color: #BBB;
+}

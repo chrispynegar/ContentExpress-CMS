@@ -13,7 +13,9 @@ class Permission extends Core {
 	
 	protected static $table_name = 'permissions';
 	protected static $table_fields = array('id', 'name', 'access');
-	
+	public $id;
+	public $name;
+	public $access;
 	
 	/**
 	 * Access

@@ -12,6 +12,18 @@ class User extends Core {
     
     protected static $table_name = 'users';
     protected static $table_fields = array('id' , 'permission', 'username', 'password', 'email', 'first_name', 'last_name', 'active', 'url', 'bio', 'date_modified', 'date_created');
+    public $id;
+    public $permission;
+    public $username;
+    public $password;
+    public $email;
+    public $first_name;
+    public $last_name;
+    public $active;
+    public $url;
+    public $bio;
+    public $date_modified;
+    public $date_created;
     
     /**
      * Full name
@@ -87,12 +99,27 @@ class User extends Core {
      * 
      * @access public
      * @param array
+     * @param int
      * @param string
      * @return boolean 
      */
     
-    public function save_user($data = null, $redirect = null) {
-        
+    public function save_user($data = null, $user_id = null, $redirect = null) {
+        if(isset($data) && is_array($data)) {
+	        
+        } else {
+	        $this->permission = $_POST['permission'];
+	        $this->username = $_POST['username'];
+	        $this->password = $_POST['password'];
+	        $this->email = $_POST['email'];
+	        $this->first_name = $_POST['first_name'];
+	        $this->last_name = $_POST['last_name'];
+	        $this->active = $_POST['active'];
+	        $this->url = $_POST['url'];
+	        $this->bio = $_POST['bio'];
+	        $this->date_modified = $_POST['date_modified'];
+	        $this->date_created = $_POST['date_created'];
+        }
     }
     
 }
