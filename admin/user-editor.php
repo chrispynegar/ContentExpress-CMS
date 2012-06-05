@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * User editor
+ *
+ * Visual for creating and editing users.
+ *
+ * @package Content Express CMS
+ * @author Chris Pynegar
+ */
+
 require('../library/load.php');
 
 if(!$session->is_logged_in()) $system->redirect('login.php');
