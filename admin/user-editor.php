@@ -6,10 +6,6 @@ if(isset($_GET['id'])) {
 	$user = User::find_by_ud($_GET['id']);
 }
 
-if(isset($_POST['userame'])) {
-	echo 'ok';
-}
-
 if(isset($_POST['submit_form']) && $_POST['submit_form'] == 'accept') {
 	if(isset($user->id)) {
 		$user->save_user(null, $user->id, 'user-manager.php');
@@ -41,6 +37,7 @@ require(ADMIN_TEMPLATE_HEADER);
 </div>
 <form action="user-editor.php<?php echo (isset($user->id) ? '?id='.htmlentities($user->id) : ''); ?>" method="post" class="editor-form" id="editor">
 	<div class="left-column">
+		<?php $system->message(); ?>
 		<label for="username">Username</label>
 		<input type="text" name="username" id="username" value="<?php echo (isset($_POST['username']) ? $_POST['username'] : (isset($user->username) ? $user->username : '')); ?>" />
 		<span class="hint username-hint"></span>

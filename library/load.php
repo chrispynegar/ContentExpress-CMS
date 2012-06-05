@@ -26,7 +26,7 @@ foreach($config as $key => $value) {
 }
 
 // load required helpers
-$helpers = array('system');
+$helpers = array('system', 'validation');
 foreach($helpers as $helper) {
 	if(file_exists(SITE_ROOT.'library/helpers/'.$helper.'.php')) {
 		require(SITE_ROOT.'library/helpers/'.$helper.'.php');

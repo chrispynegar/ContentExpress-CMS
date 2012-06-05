@@ -159,7 +159,7 @@ class Core {
     
     protected function attributes() {
         $attributes = array();
-        foreach(static::$table_name as $field) {
+        foreach(static::$table_fields as $field) {
             if(property_exists($this, $field)) {
                 $attributes[$field] = $this->$field;
             }

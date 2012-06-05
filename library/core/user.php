@@ -105,20 +105,67 @@ class User extends Core {
      */
     
     public function save_user($data = null, $user_id = null, $redirect = null) {
+    	global $database;
+    	global $session;
+    	global $system;
+    	global $validation;
         if(isset($data) && is_array($data)) {
 	        
         } else {
 	        $this->permission = $_POST['permission'];
 	        $this->username = $_POST['username'];
-	        $this->password = $_POST['password'];
 	        $this->email = $_POST['email'];
 	        $this->first_name = $_POST['first_name'];
 	        $this->last_name = $_POST['last_name'];
 	        $this->active = $_POST['active'];
 	        $this->url = $_POST['url'];
 	        $this->bio = $_POST['bio'];
-	        $this->date_modified = $_POST['date_modified'];
-	        $this->date_created = $_POST['date_created'];
+	        $password = $_POST['password'];
+	        $password2 = $_POST['password2'];
+        }
+        $this->date_modified = strftime("%Y-%m-%d %H:%M:%S", time());
+        if(is_numeric($user_id)) {
+	        $stored_data = self::find_by_id($user_id);
+	        $this->id = $user_id;
+	        $this->date_created = $stored_data->date_created;
+        } else {
+	        $this->date_created = $this->date_modified;
+        }
+        if($validation->required($this->username) && $validation->required($this->email) && $validation->required($password) && $validation->required($password2)) {
+	        if(!$validation->username($this->username)) {
+		        $session->message('Please enter a valid username.');
+		        return false;
+	        }
+	        if(!$validation->email($this->email)) {
+		        $session->message('Please enter a valid email address.');
+		        return false;
+	        }
+	        if(isset($this->url) && !empty($this->url)) {
+		        if(!$validation->url($this->url)) {
+			        $session->message('You must enter a valid url.');
+			        return false;
+		        }
+	        }
+	        if(!$validation->identical($password, $password2)) {
+		        $session->message('Your passwords do not match.');
+		        return false;
+	        } else {
+		        $this->password = sha1($password);
+	        }
+	        if($this->save()) {
+	        	$session->message('This user was successfully saved.');
+		        if(isset($redirect) && !empty($redirect)) {
+			        $system->redirect($redirect);
+		        } else {
+			        return true;
+		        }
+	        } else {
+		        $session->message('This user could not be saved.');
+		        return false;
+	        }
+        } else {
+	        $session->message('Please fill in the required fields.');
+	        return false;
         }
     }
     
