@@ -72,7 +72,7 @@ class User extends Core {
     
     public function find_by_username($username = '') {
         global $database;
-        $result_array = self::find_by_sql('SELECR * FROM ' . DB_TBL_PREFIX . self::$table_name . 'WHERE username="' . $username . '" LIMIT 1');
+        $result_array = self::find_by_sql('SELECT * FROM ' . DB_TBL_PREFIX . self::$table_name . ' WHERE username="' . $username . '" LIMIT 1');
         return (!empty($result_array) ? array_shift($result_array) : false);
     }
     
@@ -88,7 +88,7 @@ class User extends Core {
     
     public function find_by_email($email = '') {
         global $database;
-        $result_array = self::find_by_sql('SELECR * FROM ' . DB_TBL_PREFIX . self::$table_name . 'WHERE email="' . $email . '" LIMIT 1');
+        $result_array = self::find_by_sql('SELECT * FROM ' . DB_TBL_PREFIX . self::$table_name . ' WHERE email="' . $email . '" LIMIT 1');
         return (!empty($result_array) ? array_shift($result_array) : false);
     }
     
@@ -131,10 +131,46 @@ class User extends Core {
         } else {
 	        $this->date_created = $this->date_modified;
         }
-        if($validation->required($this->username) && $validation->required($this->email) && $validation->required($password) && $validation->required($password2)) {
+        if($validation->required($this->username) && $validation->required($this->email)) {
+        	if(isset($stored_data)) {
+	        	if(isset($password) && !empty($password) && isset($password2) && !empty($password2)) {
+		        	if(!$validation->identical($password, $password2)) {
+				        $session->message('Your passwords do not match.');
+				        return false;
+			        } else {
+				        $this->password = sha1($password);
+			        }
+	        	}
+        	} else {
+	        	if($validation->required($password) && $validation->required($password2)) {
+	        		if(!$validation->identical($password, $password2)) {
+				        $session->message('Your passwords do not match.');
+				        return false;
+			        } else {
+				        $this->password = sha1($password);
+			        }
+	        	} else {
+		        	$session->message('Passwords are required');
+		        	return false;
+	        	}
+        	}
 	        if(!$validation->username($this->username)) {
 		        $session->message('Please enter a valid username.');
 		        return false;
+	        } else {
+		        if(isset($stored_data)) {
+			        if($stored_data->username !== $this->username) {
+				        if($this->find_by_username($this->username)) {
+					        $session->message('This username already exists.');
+					        return false;
+				        }
+			        }
+		        } else {
+			        if($this->find_by_username($this->username)) {
+				        $session->message('This username already exists, please choose another.');
+				        return false;
+			        }
+		        }
 	        }
 	        if(!$validation->email($this->email)) {
 		        $session->message('Please enter a valid email address.');
@@ -145,12 +181,6 @@ class User extends Core {
 			        $session->message('You must enter a valid url.');
 			        return false;
 		        }
-	        }
-	        if(!$validation->identical($password, $password2)) {
-		        $session->message('Your passwords do not match.');
-		        return false;
-	        } else {
-		        $this->password = sha1($password);
 	        }
 	        if($this->save()) {
 	        	$session->message('This user was successfully saved.');

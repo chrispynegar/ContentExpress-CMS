@@ -13,14 +13,14 @@
             <h1>Content Express CMS</h1>
         </header>
         <header class="header-right">
-            <p>You are logged in as <a href="#" title="admin">admin</a></p>
+            <p>You are logged in as <a href="#" title="<?php echo $_SESSION['user_username']; ?>"><?php echo $_SESSION['user_username']; ?></a></p>
             <p>You currently have <a href="#" title="2 Unread Messages">2</a> unread messages</p>
         </header>
     </header>
     
     <div id="wrapper">
         <ul id="nav">
-        	<li><a href="index.php">Dashboard</a></li>
+        	<li><a href="./">Dashboard</a></li>
             <li class="dropdown">
             	<a href="#" class="seperator">Content</a>
                 <ul class="subnav">
@@ -44,7 +44,7 @@
             <li class="dropdown">
                 <a href="#" class="seperator">User</a>
                 <ul>
-                    <li><a href="#">Manage</a></li>
+                    <li><a href="./user-manager.php">Manage</a></li>
                     <li><a href="#">Notifications</a></li>
                     <li><a href="#">Messages</a></li>
                 </ul>
@@ -64,7 +64,7 @@
 	            	<li><a href="#">Logs</a></li>
 	            </ul>
             </li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="./logout.php">Logout</a></li>
         </ul>
         <div id="main-content">
 	        <h2><?php echo $title; ?></h2>

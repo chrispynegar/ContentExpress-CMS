@@ -16,7 +16,7 @@ if(!$session->is_logged_in()) $system->redirect('login.php');
 Permission::access(4);
 
 if(isset($_GET['id'])) {
-	$user = User::find_by_ud($_GET['id']);
+	$user = User::find_by_id($_GET['id']);
 }
 
 if(isset($_POST['submit_form']) && $_POST['submit_form'] == 'accept') {
@@ -44,9 +44,9 @@ require(ADMIN_TEMPLATE_HEADER);
 ?>
 
 <div class="toolbar">
-	<a href="#" class="toolbar-button accept" title="Accept"><img src="../library/icons/accept_page.png" alt="Accept Page Icon" /> Accept</a>
-	<a href="#" class="toolbar-button save" title="Save"><img src="../library/icons/accept.png" alt="Accept Icon" /> Save</a>
-	<a href="#" class="toolbar-button" title="Help"><img src="../library/icons/help.png" alt="Help Icon" /> Help</a>
+	<a href="#" class="toolbar-button accept" title="Accept"><img src="../library/icons/accept_page.png" alt="Accept page icon" /> Accept</a>
+	<a href="#" class="toolbar-button save" title="Save"><img src="../library/icons/accept.png" alt="Accept icon" /> Save</a>
+	<a href="#" class="toolbar-button" title="Help"><img src="../library/icons/help.png" alt="Help icon" /> Help</a>
 </div>
 <form action="user-editor.php<?php echo (isset($user->id) ? '?id='.htmlentities($user->id) : ''); ?>" method="post" class="editor-form" id="editor">
 	<div class="left-column">
@@ -56,10 +56,10 @@ require(ADMIN_TEMPLATE_HEADER);
 		<span class="hint username-hint"></span>
 		<?php if(!isset($user->password)): ?>
 		<label for="password">Password</label>
-		<input type="password" name="password" id="password" value="" />
+		<input type="password" name="password" id="password" value="<?php echo (isset($_POST['password']) ? $_POST['password'] : ''); ?>" />
 		<p class="hint password-hint"></p>
 		<label for="password2">Re-Enter Password</label>
-		<input type="password" name="password2" id="password2" value="" />
+		<input type="password" name="password2" id="password2" value="<?php echo (isset($_POST['password2']) ? $_POST['password2'] : ''); ?>" />
 		<span class="hint password2-hint"></span>
 		<?php endif; ?>
 		<label for="email">Email Address</label>
@@ -103,11 +103,10 @@ require(ADMIN_TEMPLATE_HEADER);
 				<p><?php echo (isset($user->active) && $user->active == 1 ? 'Active' : 'Not active' ); ?></p>
 				<?php if(isset($user->date_modified) && $user->date_modified !== $user->date_created): ?>
 				<p>Date Modified:</p>
-				<p><?php echo date('jS F Y', $user->date_modified); ?></p>
-				<p></p>
+				<p><?php echo $user->date_modified; ?></p>
 				<?php endif; ?>
 				<p>Date Created:</p>
-				<p><?php echo (isset($user->date_created) ? date('jS F Y', $user->date_created) : 'Not yet created'); ?></p>
+				<p><?php echo (isset($user->date_created) ? $user->date_created : 'Not yet created'); ?></p>
 			</div>
 			<h3><a href="#">Settings</a></h3>
 			<div>
