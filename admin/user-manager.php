@@ -43,11 +43,15 @@ require(ADMIN_TEMPLATE_HEADER);
 			<td><?php echo $permission->name; ?></td>
 			<td><?php echo $user->username; ?></td>
 			<td><span class="<?php echo ($user->active == 1 ? 'published">Yes' : 'not-published">No'); ?></span></td>
-			<td><a href="./user-editor.php?id=<?php echo $user->id; ?>" title="Edit <?php echo $user->username; ?>">Edit</a></td>
-			<td><a href="#" title="Delete <?php echo $user->username; ?>">Delete</td>
+			<td><a href="./user-editor.php?id=<?php echo htmlentities($user->id); ?>" title="Edit <?php echo $user->username; ?>">Edit</a></td>
+			<td><a href="./user-delete.php?id=<?php echo htmlentities($user->id); ?>" title="Delete <?php echo $user->username; ?>" class="delete-alert">Delete</td>
 		</tr>
 		<?php endforeach; ?>
 	</table>
+</div>
+
+<div class="modal-content delete-alert-dialog" title="Warning">
+    <p>Are you sure you want to delete this user?</p>
 </div>
 
 <?php require(ADMIN_TEMPLATE_FOOTER); ?>

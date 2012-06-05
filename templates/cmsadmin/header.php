@@ -68,3 +68,4 @@
         </ul>
         <div id="main-content">
 	        <h2><?php echo $title; ?></h2>
+	        <?php $system->message(); ?>
