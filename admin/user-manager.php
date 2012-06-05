@@ -15,7 +15,15 @@ if(!$session->is_logged_in()) $system->redirect('login.php');
 
 Permission::access(4);
 
-$users = User::find_all();
+$page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$per_page = 10;
+
+$total_count = User::count_all();
+
+$pagination = new Pagination($page, $per_page, $total_count);
+
+$users = User::select_paginated($per_page);
 
 $title = 'User Manager';
 
@@ -24,6 +32,11 @@ require(ADMIN_TEMPLATE_HEADER);
 ?>
 
 <div class="toolbar">
+	<form class="search-form" action="#" method="post">
+		<label for="search">Search</label>
+		<input type="text" name="search" id="search" value="" />
+		<a href="#" class="submit">Go</a>
+	</form>
 	<a href="./user-editor.php" class="toolbar-button" title="Add"><img src="../library/icons/add.png" alt="Add icon" /> Add</a>
 </div>
 <div class="main-column">
@@ -48,6 +61,7 @@ require(ADMIN_TEMPLATE_HEADER);
 		</tr>
 		<?php endforeach; ?>
 	</table>
+	<?php $pagination->display('user-manager.php', $page); ?>
 </div>
 
 <div class="modal-content delete-alert-dialog" title="Warning">

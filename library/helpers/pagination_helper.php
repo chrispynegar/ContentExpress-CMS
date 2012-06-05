@@ -6,7 +6,7 @@ class Pagination {
 	public $per_page;
 	public $total_count;
 	
-	public function __construct($page = 1, $per_page = 3) {
+	public function __construct($page = 1, $per_page = 3, $total_count = 0) {
 		$this->current_page = (int)$page;
 		$this->per_page = (int)$per_page;
 		$this->total_count = (int)$total_count;
@@ -34,6 +34,32 @@ class Pagination {
 	
 	public function has_next_page() {
 		return $this->next_page() <= $this->total_pages() ? true : false;
+	}
+	
+	public function display($file, $page) {
+		echo '<div class="pagination-wrap">';
+		if($this->total_pages() > 1) {
+			echo '<ul class="pagination">';
+			if($this->has_previous_page()) {
+				echo '<li><a href="./'.$file.'?page=';
+				echo $this->previous_page();
+				echo '">&laquo;</a></li>';
+			}
+			for($i = 1; $i <= $this->total_pages(); $i++) {
+				if($i == $page) {
+					echo '<li><a href="./'.$file.'?page='.$i.'" class="active disable-link">'.$i.'</a></li>';
+				} else {
+					echo '<li><a href="./'.$file.'?page='.$i.'">'.$i.'</a></li>';
+				}
+			}
+			if($this->has_next_page()) {
+				echo '<li><a href="./'.$file.'?page=';
+				echo $this->next_page();
+				echo '">&raquo;</a></li>';
+			}
+			echo '</ul>';
+		}
+		echo '</div>';
 	}
 	
 }

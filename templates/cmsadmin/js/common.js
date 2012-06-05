@@ -100,6 +100,10 @@ $(document).ready(function() {
     	return false;
     });
     
+    $('a.disable-link').click(function() {
+		return false;
+    });
+    
     dropdown_animation();
     
 });

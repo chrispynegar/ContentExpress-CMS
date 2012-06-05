@@ -200,6 +200,22 @@ class Core {
     }
     
     /**
+     * Select Paginated
+     *
+     * Returns the paginated rows
+     *
+     * @access public
+     * @param int
+     * @return array
+     */
+    
+    public static function select_paginated($per_page) {
+	    global $pagination;
+	    $sql = 'SELECT * FROM '.DB_TBL_PREFIX.static::$table_name.' LIMIT '.$per_page.' OFFSET '.$pagination->offset();
+	    return static::find_by_sql($sql);
+    }
+    
+    /**
      * Create
      * 
      * Creates a new record
