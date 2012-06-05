@@ -12,6 +12,6 @@ require(ADMIN_TEMPLATE_HEADER);
 
 ?>
 
-
+<?php $system->message(); ?>
 
 <?php require(ADMIN_TEMPLATE_FOOTER);

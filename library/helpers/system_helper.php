@@ -36,10 +36,17 @@ class System {
 	 * @access public
 	 * @return string
 	 */
-	 public function message() {
+	 public function message($tags = '<div id="system-message">|</div>	') {
 		 if(isset($_SESSION['message']) && !empty($_SESSION['message'])) {
-			 echo $_SESSION['message']; unset($_SESSION['message']);
-			 return;
+		 	if(isset($tags) && !empty($tags)) {
+			 	$tag = explode('|', $tags);
+			 	echo $tag[0].$_SESSION['message'].$tag[1];
+			 	unset($_SESSION['message']);
+			 	return;
+		 	} else {
+				echo $_SESSION['message']; unset($_SESSION['message']);
+				return;	
+		 	}
 		 }
 	 }
 	
