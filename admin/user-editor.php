@@ -2,6 +2,10 @@
 
 require('../library/load.php');
 
+if(!$session->is_logged_in()) $system->redirect('login.php');
+
+Permission::access(4);
+
 if(isset($_GET['id'])) {
 	$user = User::find_by_ud($_GET['id']);
 }

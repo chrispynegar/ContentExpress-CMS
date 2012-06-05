@@ -30,9 +30,13 @@ class Permission extends Core {
 		global $session;
 		if(!empty($permission_id)) {
 			$permission = Permission::find_by_id($permission_id);
-		} elseif($session->user_id) {
+		} elseif(isset($session->user_id)) {
 			$user = User::find_by_id($session->user_id);
-			$permission = Permission::find_by_id($user->permission);
+			if($user) {
+				$permission = Permission::find_by_id($user->permission);
+			} else {
+				die('Could not find user.');
+			}
 		} else {
 			die('No valid access passed to function');
 		}
