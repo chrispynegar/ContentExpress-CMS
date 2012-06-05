@@ -78,6 +78,26 @@ class Core {
     }
     
     /**
+     * Find
+     * 
+     * Finds a record with a value that matches the selected field.
+     * 
+     * @access public
+     * @param string
+     * @param string
+     * @return array 
+     */
+    
+    public function find($field, $value, $limit = null) {
+        global $database;
+        if(isset($limit) && !empty($limit)) {
+	        $limit = ' LIMIT ' . $limit;
+        }
+        $result_array = self::find_by_sql('SELECT * FROM ' . DB_TBL_PREFIX . static::$table_name . ' WHERE '.$field.'="'.$value.'"'.$limit);
+        return (!empty($result_array) ? array_shift($result_array) : false);
+    }
+    
+    /**
      * Find by SQL
      * 
      * Find a record by an SQL Query

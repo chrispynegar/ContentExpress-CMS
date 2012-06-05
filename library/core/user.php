@@ -35,7 +35,11 @@ class User extends Core {
      */
     
     public function fullname() {
-        
+        if(isset($this->first_name) && isset($this->last_name)) {
+	        return $this->first_name.' '.$this->last_name;
+        } else {
+	        return null;
+        }
     }
     
     /**
@@ -58,38 +62,6 @@ class User extends Core {
         $sql .= ' WHERE username = \''.$username.'\' AND password = \''.$hashed_password.'\' LIMIT 1';
         $result_array = self::find_by_sql($sql);
         return !empty($result_array) ? array_shift($result_array) : false; 
-    }
-    
-    /**
-     * Find by username
-     * 
-     * Search the database for a record with a username that matches the one passed to the function and return the array if a match is found
-     * 
-     * @access public
-     * @param string
-     * @return array
-     */
-    
-    public function find_by_username($username = '') {
-        global $database;
-        $result_array = self::find_by_sql('SELECT * FROM ' . DB_TBL_PREFIX . self::$table_name . ' WHERE username="' . $username . '" LIMIT 1');
-        return (!empty($result_array) ? array_shift($result_array) : false);
-    }
-    
-    /**
-     * Find by email
-     * 
-     * Search the database for a record with an email address that matches the one passed to the function and return the array if a match is found
-     * 
-     * @access public
-     * @param string
-     * @return array
-     */
-    
-    public function find_by_email($email = '') {
-        global $database;
-        $result_array = self::find_by_sql('SELECT * FROM ' . DB_TBL_PREFIX . self::$table_name . ' WHERE email="' . $email . '" LIMIT 1');
-        return (!empty($result_array) ? array_shift($result_array) : false);
     }
     
     /**
@@ -160,7 +132,7 @@ class User extends Core {
 	        } else {
 		        if(isset($stored_data)) {
 			        if($stored_data->username !== $this->username) {
-				        if($this->find_by_username($this->username)) {
+				        if($this->find('username', $this->username)) {
 					        $session->message('This username already exists.');
 					        return false;
 				        }
@@ -187,7 +159,14 @@ class User extends Core {
 		        if(isset($redirect) && !empty($redirect)) {
 			        $system->redirect($redirect);
 		        } else {
-			        return true;
+		        	if(!isset($stored_data)) {
+			        	$new_user = $this->find('username', $this->username);
+			        	if($new_user) {
+				        	$system->redirect('user-editor.php?id='.$new_user->id);
+			        	}
+		        	} else {
+			        	return true;
+		        	}
 		        }
 	        } else {
 		        $session->message('This user could not be saved.');
