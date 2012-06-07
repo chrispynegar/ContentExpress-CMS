@@ -81,20 +81,18 @@ class User extends Core {
     	global $session;
     	global $system;
     	global $validation;
-        if(isset($data) && is_array($data)) {
-	        
-        } else {
-	        $this->permission = $_POST['permission'];
-	        $this->username = $_POST['username'];
-	        $this->email = $_POST['email'];
-	        $this->first_name = $_POST['first_name'];
-	        $this->last_name = $_POST['last_name'];
-	        $this->active = $_POST['active'];
-	        $this->url = $_POST['url'];
-	        $this->bio = $_POST['bio'];
-	        $password = $_POST['password'];
-	        $password2 = $_POST['password2'];
-        }
+        
+        $this->permission = (isset($data) && is_array($data) ? $data['permission'] : $_POST['permission']);
+        $this->username = (isset($data) && is_array($data) ? $data['username'] : $_POST['username']);
+        $this->email = (isset($data) && is_array($data) ? $data['email'] : $_POST['email']);
+        $this->first_name = (isset($data) && is_array($data) ? $data['first_name'] : $_POST['first_name']);
+        $this->last_name = (isset($data) && is_array($data) ? $data['last_name'] : $_POST['last_name']);
+        $this->active = (isset($data) && is_array($data) ? $data['active'] : $_POST['active']);
+        $this->url = (isset($data) && is_array($data) ? $data['url'] : $_POST['url']);
+        $this->bio = (isset($data) && is_array($data) ? $data['bio'] : $_POST['bio']);
+        $password = (isset($data) && is_array($data) ? $data['password'] : $_POST['password']);
+        $password2 = (isset($data) && is_array($data) ? $data['password2'] : $_POST['password2']);
+        
         $this->date_modified = strftime("%Y-%m-%d %H:%M:%S", time());
         if(is_numeric($user_id)) {
 	        $stored_data = self::find_by_id($user_id);
