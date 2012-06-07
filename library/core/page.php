@@ -8,7 +8,7 @@ if(!defined('SITE_ROOT')) exit('Direct access denied');
  * @package Content Express CMS
  * @author Chris Pynegar
  */
-class User extends Core {
+class Page extends Core {
 
 	protected static $table_name = 'pages';
 	protected static $table_fields = array('id', 'author', 'title', 'content', 'keywords', 'description', 'published', 'date_modified', 'date_created');

@@ -25,7 +25,7 @@
             	<a href="#" class="seperator">Content</a>
                 <ul class="subnav">
                     <li><a href="#">Articles</a></li>
-                    <li><a href="#">Pages</a></li>
+                    <li><a href="./page-manager.php">Pages</a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Categories</a></li>
                     <li><a href="#">Modules</a></li>
