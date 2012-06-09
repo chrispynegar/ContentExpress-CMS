@@ -52,24 +52,18 @@ require(ADMIN_TEMPLATE_HEADER);
 	<div class="left-column">
 		<label for="username">Username</label>
 		<input type="text" name="username" id="username" value="<?php echo (isset($_POST['username']) ? $_POST['username'] : (isset($user->username) ? $user->username : '')); ?>" />
-		<span class="hint username-hint"></span>
 		<?php if(!isset($user->password)): ?>
 		<label for="password">Password</label>
 		<input type="password" name="password" id="password" value="<?php echo (isset($_POST['password']) ? $_POST['password'] : ''); ?>" />
-		<p class="hint password-hint"></p>
 		<label for="password2">Re-Enter Password</label>
 		<input type="password" name="password2" id="password2" value="<?php echo (isset($_POST['password2']) ? $_POST['password2'] : ''); ?>" />
-		<span class="hint password2-hint"></span>
 		<?php endif; ?>
 		<label for="email">Email Address</label>
 		<input type="text" name="email" id="email" value="<?php echo (isset($_POST['email']) ? $_POST['email'] : (isset($user->email) ? $user->email : '')); ?>" />
-		<span class="hint email-hint"></span>
 		<label for="first_name">First Name</label>
 		<input type="text" name="first_name" id="first_name" value="<?php echo (isset($_POST['first_name']) ? $_POST['first_name'] : (isset($user->first_name) ? $user->first_name : '')); ?>" />
-		<span class="hint first-name-hint"></span>
 		<label for="last_name">Last Name</label>
 		<input type="text" name="last_name" id="last_name" value="<?php echo (isset($_POST['last_name']) ? $_POST['last_name'] : (isset($user->last_name) ? $user->last_name : '')); ?>" />
-		<span class="hint last-name-hint"></span>
 		<label for="permission">Access level</label>
 		<select name="permission" id="permission">
 			<?php $permissions = Permission::find_all(); ?>
@@ -77,10 +71,8 @@ require(ADMIN_TEMPLATE_HEADER);
 			<option value="<?php echo $permission->id; ?>"<?php echo (isset($_POST['permission']) && $_POST['permission'] == $permission->id ? ' selected="selected"' : (isset($user->permission) && $user->permission == $permission->id ? ' selected="selected"' : '')); ?>><?php echo $permission->name; ?></option>
 			<?php endforeach; ?>
 		</select>
-		<span class="hint permission-hint"></span>
 		<label for="url">URL</label>
 		<input type="text" name="url" id="url" value="<?php echo (isset($_POST['url']) ? $_POST['url'] : (isset($user->url) ? $user->url : '')); ?>" />
-		<span class="hint url-hint"></span>
 		<label for="bio">Bio</label>
 		<textarea name="bio" id="bio" class="editor"><?php echo (isset($_POST['bio']) ? $_POST['bio'] : (isset($user->bio) ? $user->bio : '')); ?></textarea>
 		<span class="hint bio-hint"></span>
@@ -88,10 +80,8 @@ require(ADMIN_TEMPLATE_HEADER);
 		<p>Leave this blank if you do not want to change the password for this user.</p>
 		<label for="password">Password</label>
 		<input type="password" name="password" id="password" value="" />
-		<span class="hint password-hint"></span>
 		<label for="password2">Re-Enter Password</label>
 		<input type="password" name="password2" id="password2" value="" />
-		<span class="hint password2-hint"></span>
 		<?php endif; ?>
 	</div>
 	<div class="right-column">

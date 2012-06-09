@@ -28,7 +28,7 @@ if(isset($_POST['submit_form']) && $_POST['submit_form'] == 'accept') {
 	}
 } elseif(isset($_POST['submit_form']) && $_POST['submit_form'] == 'save') {
 	if(isset($page->id)) {
-		$page->save_page(null, $user->id, 'page-manager.php');
+		$page->save_page(null, $page->id, 'page-manager.php');
 	} else {
 		$page = new Page();
 		$page->save_page();
@@ -52,10 +52,8 @@ require(ADMIN_TEMPLATE_HEADER);
 	<div class="left-column">
 		<label for="title">Title</label>
 		<input type="text" name="title" id="title" value="<?php echo (isset($_POST['title']) ? $_POST['title'] : (isset($page->title) ? $page->title : '')); ?>" />
-		<span class="hint title-hint"></span>
 		<label for="content">Content</label>
 		<textarea name="content" id="content" class="editor"><?php echo (isset($_POST['content']) ? $_POST['content'] : (isset($page->content) ? $page->content : '')); ?></textarea>
-		<span class="hint bio-hint"></span>
 	</div>
 	<div class="right-column">
 		<div class="accordion">

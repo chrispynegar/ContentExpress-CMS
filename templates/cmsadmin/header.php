@@ -34,8 +34,8 @@
             <li class="dropdown">
             	<a href="#" class="seperator">Menu</a>
                 <ul class="subnav">
-                    <li><a href="#">Create</a></li>
-                    <li><a href="#">Manage</a></li>
+                    <li><a href="./menu-editor.php">Create</a></li>
+                    <li><a href="./menu-manager.php">Manage</a></li>
                     <li><hr /></li>
                     <li><a href="#">Main Menu</a></li>
                     <li><a href="#">Footer Menu</a></li>

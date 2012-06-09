@@ -3,30 +3,27 @@
 if(!defined('SITE_ROOT')) exit('Direct access denied');
 
 /**
- * The core Page class
+ * The core Menu class
  *
  * @package Content Express CMS
  * @author Chris Pynegar
  */
-class Page extends Core {
+class Menu extends Core {
 
-	protected static $table_name = 'pages';
-	protected static $table_fields = array('id', 'author', 'title', 'alias', 'content', 'keywords', 'description', 'published', 'date_modified', 'date_created');
+	protected static $table_name = 'menus';
+	protected static $table_fields = array('id', 'name', 'alias', 'description', 'published', 'date_modified', 'date_created');
 	public $id;
-	public $author;
-	public $title;
+	public $name;
 	public $alias;
-	public $content;
-	public $keywords;
 	public $description;
 	public $published;
 	public $date_modified;
 	public $date_created;
 	
 	/**
-     * Saves a page
+     * Saves a menu
      * 
-     * Saves a page, if it has an ID it will update the record with that ID otherwise it will create a new page.
+     * Saves a menu, if it has an ID it will update the record with that ID otherwise it will create a new menu.
      * 
      * @access public
      * @param array
@@ -35,57 +32,54 @@ class Page extends Core {
      * @return boolean 
      */
 	
-	public function save_page($data = null, $page_id = null, $redirect = null) {
+	public function save_menu($data = null, $menu_id = null, $redirect = null) {
 		global $database;
     	global $session;
     	global $system;
     	global $validation;
     	
-    	$this->author = $session->user_id;
-    	$this->title = trim((isset($data) && is_array($data) ? $data['title'] : $_POST['title']));
-    	$this->content = trim((isset($data) && is_array($data) ? $data['content'] : $_POST['content']));
-		$this->keywords = trim((isset($data) && is_array($data) ? $data['keywords'] : $_POST['keywords']));
+    	$this->name = trim((isset($data) && is_array($data) ? $data['name'] : $_POST['name']));
 		$this->description = trim((isset($data) && is_array($data) ? $data['description'] : $_POST['description']));
 		$this->published = trim((isset($data) && is_array($data) ? $data['published'] : $_POST['published']));
 		
 		$this->date_modified = strftime("%Y-%m-%d %H:%M:%S", time());
         
-        if(is_numeric($page_id)) {
-	        $stored_data = self::find_by_id($page_id);
-	        $this->id = $page_id;
+        if(is_numeric($menu_id)) {
+	        $stored_data = self::find_by_id($menu_id);
+	        $this->id = $menu_id;
 	        $this->alias = $stored_data->alias;
 	        $this->date_created = $stored_data->date_created;
         } else {
 	        $this->date_created = $this->date_modified;
         }
         
-        if($validation->required($this->title) && $validation->required($this->content)) {
+        if($validation->required($this->name)) {
         	if(!isset($stored_data)) {
-        		$this->alias = $system->url_format($this->title);
+        		$this->alias = $system->url_format($this->name);
 	        	if($this->find('alias', $this->alias)) {
 	        		$append = 1;
 		        	while($this->find('alias', $this->alias)) {
-			        	$this->alias = $system->url_format($this->title).'-'.$append;
+			        	$this->alias = $system->url_format($this->name).'-'.$append;
 			        	$append++;
 		        	}
 	        	}
         	}
 	        if($this->save()) {
-	        	$session->message('This page was successfully saved.');
+	        	$session->message('This menu was successfully saved.');
 		        if(isset($redirect) && !empty($redirect)) {
 			        $system->redirect($redirect);
 		        } else {
 		        	if(!isset($stored_data)) {
-			        	$new_page = $this->find('alias', $this->alias);
-			        	if($new_page) {
-				        	$system->redirect('page-editor.php?id='.$new_page->id);
+			        	$new_menu = $this->find('alias', $this->alias);
+			        	if($new_menu) {
+				        	$system->redirect('menu-editor.php?id='.$new_menu->id);
 			        	}
 		        	} else {
 			        	return true;
 		        	}
 		        }
 	        } else {
-		        $session->message('This page could not be saved.');
+		        $session->message('This menu could not be saved.');
 		        return false;
 	        }
         } else {

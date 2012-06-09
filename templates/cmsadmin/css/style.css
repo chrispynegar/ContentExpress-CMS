@@ -196,6 +196,11 @@ header a:hover, header a:focus {
     padding: 10px;
 }
 
+.main-column p.no-results {
+	margin-top: 100px;
+	text-align: center;
+}
+
 .left-column {
     width: 620px;
     float: left;
