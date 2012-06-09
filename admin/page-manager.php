@@ -53,7 +53,7 @@ require(ADMIN_TEMPLATE_HEADER);
 		<tr>
 			<td><?php echo $page->id; ?></td>
 			<td><?php echo $page->title; ?></td>
-			<td><span class="<?php echo ($page->active == 1 ? 'published">Yes' : 'not-published">No'); ?></span></td>
+			<td><span class="<?php echo ($page->published == 1 ? 'published">Yes' : 'not-published">No'); ?></span></td>
 			<td><a href="./page-editor.php?id=<?php echo htmlentities($page->id); ?>" title="Edit <?php echo $page->title; ?>">Edit</a></td>
 			<td><a href="./page-delete.php?id=<?php echo htmlentities($page->id); ?>" title="Delete <?php echo $page->title; ?>" class="delete-alert">Delete</td>
 		</tr>

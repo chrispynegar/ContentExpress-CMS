@@ -82,16 +82,16 @@ class User extends Core {
     	global $system;
     	global $validation;
         
-        $this->permission = (isset($data) && is_array($data) ? $data['permission'] : $_POST['permission']);
-        $this->username = (isset($data) && is_array($data) ? $data['username'] : $_POST['username']);
-        $this->email = (isset($data) && is_array($data) ? $data['email'] : $_POST['email']);
-        $this->first_name = (isset($data) && is_array($data) ? $data['first_name'] : $_POST['first_name']);
-        $this->last_name = (isset($data) && is_array($data) ? $data['last_name'] : $_POST['last_name']);
-        $this->active = (isset($data) && is_array($data) ? $data['active'] : $_POST['active']);
-        $this->url = (isset($data) && is_array($data) ? $data['url'] : $_POST['url']);
-        $this->bio = (isset($data) && is_array($data) ? $data['bio'] : $_POST['bio']);
-        $password = (isset($data) && is_array($data) ? $data['password'] : $_POST['password']);
-        $password2 = (isset($data) && is_array($data) ? $data['password2'] : $_POST['password2']);
+        $this->permission = trim((isset($data) && is_array($data) ? $data['permission'] : $_POST['permission']));
+        $this->username = trim((isset($data) && is_array($data) ? $data['username'] : $_POST['username']));
+        $this->email = trim((isset($data) && is_array($data) ? $data['email'] : $_POST['email']));
+        $this->first_name = trim((isset($data) && is_array($data) ? $data['first_name'] : $_POST['first_name']));
+        $this->last_name = trim((isset($data) && is_array($data) ? $data['last_name'] : $_POST['last_name']));
+        $this->active = trim((isset($data) && is_array($data) ? $data['active'] : $_POST['active']));
+        $this->url = trim((isset($data) && is_array($data) ? $data['url'] : $_POST['url']));
+        $this->bio = trim((isset($data) && is_array($data) ? $data['bio'] : $_POST['bio']));
+        $password = trim((isset($data) && is_array($data) ? $data['password'] : $_POST['password']));
+        $password2 = trim((isset($data) && is_array($data) ? $data['password2'] : $_POST['password2']));
         
         $this->date_modified = strftime("%Y-%m-%d %H:%M:%S", time());
         if(is_numeric($user_id)) {
@@ -136,7 +136,7 @@ class User extends Core {
 				        }
 			        }
 		        } else {
-			        if($this->find_by_username($this->username)) {
+			        if($this->find('username', $this->username)) {
 				        $session->message('This username already exists, please choose another.');
 				        return false;
 			        }

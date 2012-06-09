@@ -36,6 +36,7 @@ class System {
 	 * @access public
 	 * @return string
 	 */
+	 
 	 public function message($tags = '<div id="system-message">|</div>	') {
 		 if(isset($_SESSION['message']) && !empty($_SESSION['message'])) {
 		 	if(isset($tags) && !empty($tags)) {
@@ -48,6 +49,21 @@ class System {
 				return;	
 		 	}
 		 }
+	 }
+	 
+	 /**
+	 * URL Format
+	 *
+	 * Formats a string for a url making it all lowercase and replaceing the spaces with the selected seperator
+	 *
+	 * @access public
+	 * @return string
+	 */
+	 
+	 public function url_format($str, $sep = '-') {
+		 $str = strtolower($str);
+		 $str = str_replace(' ', $sep, $str);
+		 return $str;
 	 }
 	
 }
