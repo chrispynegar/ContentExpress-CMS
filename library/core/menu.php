@@ -20,6 +20,10 @@ class Menu extends Core {
 	public $date_modified;
 	public $date_created;
 	
+	public static function admin_template_menu($limit = 6) {
+		return static::find_by_sql('SELECT id, name FROM ' . DB_TBL_PREFIX . static::$table_name . ' LIMIT '.$limit);
+	}
+	
 	/**
      * Saves a menu
      * 

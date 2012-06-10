@@ -48,14 +48,16 @@ require(ADMIN_TEMPLATE_HEADER);
 			<th>Published</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
+			<th>&nbsp;</th>
 		</tr>
 		<?php foreach($menus as $menu): ?>
 		<tr>
 			<td><?php echo $menu->id; ?></td>
 			<td><?php echo $menu->name; ?></td>
 			<td><span class="<?php echo ($menu->published == 1 ? 'published">Yes' : 'not-published">No'); ?></span></td>
-			<td><a href="./menu-editor.php?id=<?php echo htmlentities($menu->id); ?>" title="Edit <?php echo $menu->title; ?>">Edit</a></td>
-			<td><a href="./menu-delete.php?id=<?php echo htmlentities($menu->id); ?>" title="Delete <?php echo $menu->title; ?>" class="delete-alert">Delete</td>
+			<td><a href="./menu-item-manager.php?menu=<?php echo htmlentities($menu->id); ?>" title="<?php echo $menu->name; ?> Items">Manage Items</a></td>
+			<td><a href="./menu-editor.php?id=<?php echo htmlentities($menu->id); ?>" title="Edit <?php echo $menu->name; ?>">Edit</a></td>
+			<td><a href="./menu-delete.php?id=<?php echo htmlentities($menu->id); ?>" title="Delete <?php echo $menu->name; ?>" class="delete-alert">Delete</td>
 		</tr>
 		<?php endforeach; ?>
 	</table>

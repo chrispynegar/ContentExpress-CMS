@@ -88,6 +88,22 @@ $(document).ready(function() {
         return false;
     });
     
+    $('div.selection-modal:ui-dialog').dialog('destroy');
+    
+    $('div.selection-modal').dialog({
+	    modal: true,
+	    autoOpen: false,
+	    draggable: false,
+	    dialogClass: 'modal',
+	    show: 'fade',
+	    hide: 'fade'
+    });
+    
+    $('a.activate-selection-modal').click(function() {
+        $('div.selection-modal').dialog('open');
+        return false;
+    });
+    
     $('div.accordion').accordion({
 	    autoHeight: false
     });

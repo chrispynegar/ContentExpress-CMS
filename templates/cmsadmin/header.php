@@ -1,3 +1,8 @@
+<?php
+
+$admin_header_menus = Menu::admin_template_menu();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,8 +42,9 @@
                     <li><a href="./menu-editor.php">Create</a></li>
                     <li><a href="./menu-manager.php">Manage</a></li>
                     <li><hr /></li>
-                    <li><a href="#">Main Menu</a></li>
-                    <li><a href="#">Footer Menu</a></li>
+                    <?php foreach($admin_header_menus as $m): ?>
+                    <li><a href="./menu-item-manager.php?menu=<?php echo $m->id; ?>"><?php echo $m->name; ?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </li>
             <li class="dropdown">
