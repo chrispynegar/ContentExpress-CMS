@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Page manager
+ * Menu items manager
  *
- * The management screen for managing pages.
+ * The management screen for managing items for a specific menu.
  *
  * @package Content Express CMS
  * @author Chris Pynegar
@@ -70,7 +70,7 @@ require(ADMIN_TEMPLATE_HEADER);
 	<?php $pagination->display('menu-item-manager.php?menu'.$menu->id, $page); ?>
 </div>
 
-<div class="modal-content selection-modal" title="">
+<div class="modal-content selection-modal" title="Select Item Type">
 	<?php $types = MenuType::find_all(); ?>
 	<ul class="selection-list">
 		<?php foreach($types as $type): ?>
