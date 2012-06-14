@@ -48,6 +48,7 @@ require(ADMIN_TEMPLATE_HEADER);
 	<table>
 		<tr class="table-header">
 			<th>ID</th>
+			<th>Position</th>
 			<th>Name</th>
 			<th>Published</th>
 			<th>&nbsp;</th>
@@ -57,6 +58,7 @@ require(ADMIN_TEMPLATE_HEADER);
 		<?php foreach($menu_items as $item): ?>
 		<tr>
 			<td><?php echo $item->id; ?></td>
+			<td><?php echo $item->position; ?></td>
 			<td><?php echo $item->title; ?></td>
 			<td><span class="<?php echo ($item->active == 1 ? 'published">Yes' : 'not-published">No'); ?></span></td>
 			<td><a href="./menu-item-editor.php?menu=<?php echo htmlentities($menu->id); ?>&amp;type=<?php echo htmlentities($item->type); ?>&amp;id=<?php echo htmlentities($item->id); ?>" title="Edit <?php echo $item->title; ?>">Edit</a></td>

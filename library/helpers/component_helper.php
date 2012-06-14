@@ -17,8 +17,8 @@ class Component {
 		if(is_array($data)) {
 			foreach($data as $d) {
 				echo '<label for="'.$d['name'].'">'.$d['label'].'</label>';
-				if($d['input'] == 'text') {
-					echo '<input type="'.$d['input'].'" name="'.$d['name'].'" id="'.$d['name'].'" value="" />';
+				if($d['input'] == 'text' || $d['input'] == 'password') {
+					echo '<input type="'.$d['input'].'" name="'.$d['name'].'" id="'.$d['name'].'" value="'.$d['value'].'" />';
 				} elseif($d['input'] == 'select') {
 					echo '<select name="'.$d['name'].'" id="'.$d['name'].'">';
 					$i = 0;
@@ -31,7 +31,13 @@ class Component {
 			}
 		}
 	}
-	
+
+	public function save_data($data) {
+		if(is_array($data)) {
+			
+		}
+	}
+
 }
 
 $component = new Component();

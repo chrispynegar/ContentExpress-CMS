@@ -29,22 +29,19 @@ if(isset($_GET['id'])) {
 
 if(isset($_POST['submit_form']) && $_POST['submit_form'] == 'accept') {
 	if(isset($item->id)) {
-		$item->save_item(null, $item->id, 'menu-item-manager.php?menu='.$menu->id);
+		$item->save_item($menu->id, $type->id, $type->directory, null, $item->id, 'menu-item-manager.php?menu='.$menu->id);
 	} else {
 		$item = new MenuItem();
-		$item->save_item(null, null, 'menu-item-manager.php?menu='.$menu->id);
+		$item->save_item($menu->id, $type->id, $type->directory, null, null, 'menu-item-manager.php?menu='.$menu->id);
 	}
 } elseif(isset($_POST['submit_form']) && $_POST['submit_form'] == 'save') {
 	if(isset($item->id)) {
-		$item->save_item(null, $page->id, 'menu-item-manager.php?menu='.$menu->id);
+		$item->save_item($menu->id, $type->id, $type->directory, null, $item->id, 'menu-item-manager.php?menu='.$menu->id);
 	} else {
 		$item = new MenuItem();
-		$item->save_item();
+		$item->save_item($menu->id, $type->id, $type->directory);
 	}
 }
-
-require(SITE_ROOT.'library/helpers/component_helper.php');
-require(SITE_ROOT.'components/'.$type->directory.'/controller.php');
 
 $title = (isset($item->id) ? 'Edit' : 'Create').' Menu Item';
 
@@ -59,11 +56,13 @@ require(ADMIN_TEMPLATE_HEADER);
 	<a href="#" class="toolbar-button save" title="Save"><img src="../library/icons/accept.png" alt="Accept icon" /> Save</a>
 	<a href="#" class="toolbar-button" title="Help"><img src="../library/icons/help.png" alt="Help icon" /> Help</a>
 </div>
-<form action="page-editor.php<?php echo (isset($page->id) ? '?id='.htmlentities($page->id) : ''); ?>" method="post" class="editor-form" id="editor">
+<form action="menu-item-editor.php?menu=<?php echo htmlentities($menu->id); ?>&amp;type=<?php echo htmlentities($type->id); ?>&amp;<?php echo (isset($item->id) ? '&amp;id='.htmlentities($item->id) : ''); ?>" method="post" class="editor-form" id="editor">
 	<div class="left-column">
 		<label for="title">Title</label>
 		<input type="text" name="title" id="title" value="<?php echo (isset($_POST['title']) ? $_POST['title'] : (isset($item->title) ? $item->title : '')); ?>" />
-		<?php $component->build_form_fields($com['menu']); ?>
+		<label for="alias">Alias</label>
+		<input type="text" name="alias" id="alias" value="<?php echo (isset($_POST['alias']) ? $_POST['alias'] : (isset($item->alias) ? $item->alias : '')); ?>" />
+		<?php require(SITE_ROOT.'components/'.$type->directory.'/menu-form.php'); ?>
 	</div>
 	<div class="right-column">
 		<div class="accordion">
