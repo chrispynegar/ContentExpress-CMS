@@ -611,3 +611,27 @@ form .left-column .hint {
 	width: 618px;
 	color: #BBB;
 }
+
+ul.selection-list {
+	width: 270px;
+	overflow: hidden;
+	list-style: none;
+}
+
+ul.selection-list li {
+	float: left;
+}
+
+ul.selection-list li a, ul.selection-list li a:link, ul.selection-list li a:visited {
+	display: block;
+	text-decoration: none;
+	padding: 6px;
+	width: 260px;
+	margin: 2px 0px;
+	background: #3A9CFC;
+	border: none;
+}
+
+ul.selection-list li a:hover, ul.selection-list li a:focus {
+	background: #1E90FF;
+}

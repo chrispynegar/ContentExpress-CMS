@@ -65,6 +65,14 @@ class System {
 		 $str = str_replace(' ', $sep, $str);
 		 return $str;
 	 }
+	 
+	 public function show_404() {
+		 ob_start();
+		 require(SITE_ROOT.'errors/404.php');
+		 $view = ob_get_clean();
+		 echo $view;
+		 exit;
+	 }
 	
 }
 

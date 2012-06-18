@@ -83,6 +83,22 @@ class MenuItem extends Core {
     }
     
     /**
+     * Find by alias
+     *
+     * Find an item by its alias
+     *
+     * @access public
+     * @param string
+     * @return array
+     */
+    
+    public static function find_by_alias($alias) {
+	    global $database;
+        $result_array = static::find_by_sql('SELECT * FROM ' . DB_TBL_PREFIX . static::$table_name . ' WHERE alias="' . $alias . '" LIMIT 1');
+        return !empty($result_array) ? array_shift($result_array) : false;
+    }
+    
+    /**
      * Saves an item
      * 
      * Saves a menu item, if it has an ID it will update the record with that ID otherwise it will create a new menu item.

@@ -34,6 +34,21 @@ class Template extends Core {
         return (!empty($result_array) ? array_shift($result_array) : false);
     }
     
+    /**
+     * Public template
+     * 
+     * Finds the current public template
+     * 
+     * @access public
+     * @return array
+     */
+    
+    public static function public_template() {
+        global $database;
+        $result_array = self::find_by_sql('SELECT * FROM ' . DB_TBL_PREFIX . static::$table_name . ' WHERE type="public" AND current="1" LIMIT 1');
+        return (!empty($result_array) ? array_shift($result_array) : false);
+    }
+    
 }
 
 ?>
