@@ -11,7 +11,7 @@ if(!defined('SITE_ROOT')) exit('Direct access denied');
 class Category extends Core {
 
 	protected static $table_name = 'categories';
-	protected static $table_fields = array('id', 'parent', 'author', 'name', 'alias', 'type', 'active', 'description', 'published', 'date_modified', 'date_created');
+	protected static $table_fields = array('id', 'parent', 'author', 'name', 'alias', 'type', 'active', 'description', 'active', 'date_modified', 'date_created');
 	public $id;
 	public $parent;
 	public $author;
