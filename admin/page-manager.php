@@ -38,13 +38,16 @@ require(ADMIN_TEMPLATE_HEADER);
 		<a href="#" class="submit">Go</a>
 	</form>
 	<a href="./page-editor.php" class="toolbar-button" title="Add"><img src="../library/icons/add.png" alt="Add icon" /> Add</a>
+	<a href="#" class="toolbar-button" title="Settings"><img src="../library/icons/process.png" alt="Settings icon" /> Settings</a>
+	<a href="#" class="toolbar-button" title="Help"><img src="../library/icons/help.png" alt="Help icon" /> Help</a>
 </div>
 <div class="main-column">
 	<?php if($total_count > 0): ?>
 	<table>
 		<tr class="table-header">
 			<th>ID</th>
-			<th>Username</th>
+			<th>Author</th>
+			<th>Name</th>
 			<th>Active</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
@@ -52,6 +55,8 @@ require(ADMIN_TEMPLATE_HEADER);
 		<?php foreach($pages as $page): ?>
 		<tr>
 			<td><?php echo $page->id; ?></td>
+			<?php $author = User::find_by_id($page->author); ?>
+			<td><?php echo ($author->fullname() ? $author->fullname() : $author->username); ?></td>
 			<td><?php echo $page->title; ?></td>
 			<td><span class="<?php echo ($page->published == 1 ? 'published">Yes' : 'not-published">No'); ?></span></td>
 			<td><a href="./page-editor.php?id=<?php echo htmlentities($page->id); ?>" title="Edit <?php echo $page->title; ?>">Edit</a></td>
