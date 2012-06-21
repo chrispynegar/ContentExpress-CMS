@@ -29,7 +29,7 @@ $admin_header_menus = Menu::admin_template_menu();
             <li class="dropdown">
             	<a href="#" class="seperator">Content</a>
                 <ul class="subnav">
-                    <li><a href="#">Articles</a></li>
+                    <li><a href="./article-manager.php">Articles</a></li>
                     <li><a href="./page-manager.php">Pages</a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Categories</a></li>
