@@ -59,7 +59,7 @@ class Page extends Core {
 	        $this->date_created = $this->date_modified;
         }
         
-        if($validation->required($this->title) && $validation->required($this->content)) {
+        if($validation->required($this->name) && $validation->required($this->content)) {
         	if(!isset($stored_data)) {
         		$this->alias = $system->url_format($this->title);
 	        	if($this->find('alias', $this->alias)) {
@@ -71,7 +71,7 @@ class Page extends Core {
 	        	}
         	}
 	        if($this->save()) {
-	        	$session->message('This page was successfully saved.');
+	        	$session->message('This article was successfully saved.');
 		        if(isset($redirect) && !empty($redirect)) {
 			        $system->redirect($redirect);
 		        } else {

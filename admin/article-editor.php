@@ -28,7 +28,7 @@ if(isset($_POST['submit_form']) && $_POST['submit_form'] == 'accept') {
 	}
 } elseif(isset($_POST['submit_form']) && $_POST['submit_form'] == 'save') {
 	if(isset($article->id)) {
-		$article->save_article(null, $article->id, 'article-manager.php');
+		$article->save_article(null, $article->id);
 	} else {
 		$article = new article();
 		$article->save_article();
@@ -60,6 +60,8 @@ require(ADMIN_TEMPLATE_HEADER);
 			<option value="<?php echo $category->id; ?>"<?php echo $selected; ?>><?php echo $category->name; ?></option>
 			<?php endforeach; ?>
 		</select>
+		<label for="tags">Tags</label>
+		<input type="text" name="tags" id="tags" value="<?php echo (isset($_POST['tags']) ? $_POST['tags'] : (isset($article->tags) ? $article->tags : '')); ?>" />
 		<label for="content">Content</label>
 		<textarea name="content" id="content" class="editor"><?php echo (isset($_POST['content']) ? $_POST['content'] : (isset($article->content) ? $article->content : '')); ?></textarea>
 	</div>
@@ -68,7 +70,7 @@ require(ADMIN_TEMPLATE_HEADER);
 			<h3><a href="#">Information</a></h3>
 			<div>
 				<p>Current Status:</p>
-				<p><?php echo (isset($article->active) && $article->active == 1 ? 'Active' : 'Not active' ); ?></p>
+				<p><?php echo (isset($article->published) && $article->published == 1 ? 'Published' : 'Not published' ); ?></p>
 				<?php if(isset($article->date_modified) && $article->date_modified !== $article->date_created): ?>
 				<p>Date Modified:</p>
 				<p><?php echo $article->date_modified; ?></p>
@@ -78,10 +80,10 @@ require(ADMIN_TEMPLATE_HEADER);
 			</div>
 			<h3><a href="#">Settings</a></h3>
 			<div>
-				<label for="active">Article Active</label>
+				<label for="active">Article Published</label>
 				<div class="buttonset">
-					<input type="radio" name="active" id="active1" value="0"<?php echo (isset($article->active) && $article->active == 0 ? ' checked="checked"' : ''); ?> /><label for="active1">No</label>
-					<input type="radio" name="active" id="active2" value="1"<?php echo (isset($article->active) && $article->active == 1 ? ' checked="checked"' : (!isset($article->active) ? ' checked="checked"' : '')); ?> /><label for="active2">Yes</label>
+					<input type="radio" name="published" id="published1" value="0"<?php echo (isset($article->published) && $article->published == 0 ? ' checked="checked"' : ''); ?> /><label for="published1">No</label>
+					<input type="radio" name="published" id="published2" value="1"<?php echo (isset($article->published) && $article->published == 1 ? ' checked="checked"' : (!isset($article->published) ? ' checked="checked"' : '')); ?> /><label for="published2">Yes</label>
 				</div>
 				<label for="comments">Enable Comments</label>
 				<div class="buttonset">

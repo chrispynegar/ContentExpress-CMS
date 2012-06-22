@@ -48,7 +48,7 @@ require(ADMIN_TEMPLATE_HEADER);
 			<th>ID</th>
 			<th>Author</th>
 			<th>Name</th>
-			<th>Active</th>
+			<th>Published</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
 		</tr>
