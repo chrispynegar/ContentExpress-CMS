@@ -154,6 +154,11 @@ class User extends Core {
 	        }
 	        if($this->save()) {
 	        	$session->message('This user was successfully saved.');
+	        	if(!isset($stored_data)) {
+		        	if(mkdir(SITE_ROOT.'users/'.$this->username, 777)) {
+			        	$session->message('New user saved but could not create user directory');
+		        	}
+	        	} 
 		        if(isset($redirect) && !empty($redirect)) {
 			        $system->redirect($redirect);
 		        } else {
