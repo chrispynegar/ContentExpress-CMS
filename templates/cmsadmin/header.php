@@ -18,7 +18,7 @@ $admin_header_menus = Menu::admin_template_menu();
             <h1>Content Express CMS</h1>
         </header>
         <header class="header-right">
-            <p><a href="<?php echo BASE_URL; ?>" title="Preview Websit">Preview Website</a></p>
+            <p><a href="<?php echo BASE_URL; ?>" title="Preview Websit" target="_blank">Preview Website</a></p>
             <p>Welcome back <a href="#" title="<?php echo $_SESSION['user_username']; ?>"><?php echo $_SESSION['user_username']; ?></a>, you currently have <a href="#" title="2 Unread Messages">2</a> unread messages</p>
         </header>
     </header>
