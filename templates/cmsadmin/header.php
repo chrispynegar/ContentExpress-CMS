@@ -34,6 +34,7 @@ $admin_header_menus = Menu::admin_template_menu();
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Categories</a></li>
                     <li><a href="#">Modules</a></li>
+                    <li><a href="./comment-manager.php">Comments</a>
                 </ul>
             </li>
             <li class="dropdown">

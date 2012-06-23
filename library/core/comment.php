@@ -45,7 +45,7 @@ class Comment extends Core {
 		} elseif($type == 'photo') {
 			$type = 'photo_id';
 		}
-		return static::find_by_sql('SELECT * FROM '.DB_TBL_PREFIX.static::$table_name.' WHERE '.$type.'='.$id);
+		return static::find_by_sql('SELECT * FROM '.DB_TBL_PREFIX.static::$table_name.' WHERE '.$type.'='.$id.' AND status="published"');
 	}
 	
 	/**

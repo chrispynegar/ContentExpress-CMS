@@ -11,7 +11,7 @@ if(!defined('SITE_ROOT')) exit('Direct access denied');
 class Article extends Core {
 
 	protected static $table_name = 'articles';
-	protected static $table_fields = array('id', 'author', 'category', 'name', 'alias', 'content', 'published', 'hits', 'tags', 'keywords', 'description', 'comments', 'sharing', 'published', 'date_modified', 'date_created');
+	protected static $table_fields = array('id', 'author', 'category', 'name', 'alias', 'content', 'published', 'hits', 'tags', 'keywords', 'description', 'featured', 'comments', 'sharing', 'published', 'date_modified', 'date_created');
 	public $id;
 	public $author;
 	public $category;
@@ -23,10 +23,18 @@ class Article extends Core {
 	public $tags;
 	public $keywords;
 	public $description;
+	public $featured;
 	public $comments;
 	public $sharing;
 	public $date_modified;
 	public $date_created;
+	
+	public function featured($category = null) {
+		if(isset($category) && !empty($category)) {
+			$category = ' AND WHERE category='.$category;
+		}
+		return static::find_by_sql('SELECT * FROM '.DB_TBL_PREFIX.static::$table_name.' WHERE featured=1'.$category);
+	}
 	
 	/**
      * Saves a Article
